@@ -5,6 +5,9 @@ import { AuthService } from './auth.service';
 import { DesignService } from './design.service';
 import { RunService } from './run.service';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnySupabaseClient = SupabaseClient<Database, any, any>;
+
 export { AuthService, AuthServiceError } from './auth.service';
 export type { AuthenticatedUser } from './auth.service';
 
@@ -20,7 +23,7 @@ export * from './import';
 // Service Factory
 // ──────────────────────────────────────────────
 
-export function createServices(supabase: SupabaseClient<Database>) {
+export function createServices(supabase: AnySupabaseClient) {
   const repos = createRepositories(supabase);
 
   return {

@@ -8,6 +8,9 @@ import { AdminUserRepository, AdminRole } from '../repositories';
 // Handles authentication and authorization logic.
 // Depends on AdminUserRepository (DIP).
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnySupabaseClient = SupabaseClient<Database, any, any>;
+
 export interface AuthenticatedUser {
   id: string;
   email: string;
@@ -26,7 +29,7 @@ export class AuthServiceError extends Error {
 
 export class AuthService {
   constructor(
-    private readonly supabase: SupabaseClient<Database>,
+    private readonly supabase: AnySupabaseClient,
     private readonly adminUsers: AdminUserRepository
   ) {}
 

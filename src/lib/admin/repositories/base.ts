@@ -7,8 +7,13 @@ import { Database } from '@/types/database';
 // All repositories extend this. Accepts a Supabase client
 // via constructor injection (Dependency Inversion Principle)
 // so tests can pass a mock, and production passes the real client.
+//
+// Using `any` for extra generic params to accept clients from
+// both @supabase/supabase-js and @supabase/ssr, which have
+// slightly different generic signatures.
 
-export type DbClient = SupabaseClient<Database>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type DbClient = SupabaseClient<Database, any, any>;
 
 export interface PaginationParams {
   page: number;
