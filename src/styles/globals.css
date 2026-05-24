@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --foreground: #1a1715;
+    --background: #faf8f5;
+    --muted: #9a8f79;
+    --border: #d5d0c3;
+    --accent: #c4451a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-paper text-ink-950;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  ::selection {
+    @apply bg-press/20 text-ink-950;
+  }
+
+  /* Typographic baseline */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Decorative rule lines — press / letterpress feel */
+  .rule-line {
+    @apply h-px w-full;
+    background: linear-gradient(
+      to right,
+      transparent,
+      theme('colors.ink.300') 15%,
+      theme('colors.ink.300') 85%,
+      transparent
+    );
+  }
+
+  .rule-line-thick {
+    @apply h-[2px] w-full;
+    background: linear-gradient(
+      to right,
+      transparent,
+      theme('colors.ink.800') 10%,
+      theme('colors.ink.800') 90%,
+      transparent
+    );
+  }
+
+  /* Monospaced label pill */
+  .mono-label {
+    @apply font-mono text-2xs uppercase tracking-widest text-ink-500;
+  }
+
+  /* Product card hover lift */
+  .product-card {
+    @apply transition-all duration-300 ease-out;
+  }
+  .product-card:hover {
+    @apply -translate-y-1;
+    box-shadow:
+      0 4px 6px -1px rgb(26 23 21 / 0.06),
+      0 2px 4px -2px rgb(26 23 21 / 0.04);
+  }
+
+  /* Press button style */
+  .btn-press {
+    @apply inline-flex items-center justify-center gap-2
+      bg-ink-950 text-paper px-6 py-3
+      font-mono text-xs uppercase tracking-widest
+      transition-all duration-200 ease-out
+      hover:bg-press active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+      border border-ink-300 text-ink-800 px-6 py-3
+      font-mono text-xs uppercase tracking-widest
+      transition-all duration-200 ease-out
+      hover:border-ink-800 hover:bg-ink-950 hover:text-paper
+      active:scale-[0.98];
+  }
+}
+
+@layer utilities {
+  /* Grain texture overlay */
+  .grain::after {
+    content: '';
+    @apply pointer-events-none fixed inset-0 z-50 opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+}
