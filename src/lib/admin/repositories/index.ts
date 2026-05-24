@@ -1,3 +1,7 @@
+// ──────────────────────────────────────────────
+// Re-exports
+// ──────────────────────────────────────────────
+
 export { BaseRepository, RepositoryError, unwrap } from './base';
 export type { DbClient, PaginationParams, PaginatedResult } from './base';
 
@@ -22,8 +26,16 @@ export type { RunDesign, WizardStep, StepStatus, PlatformProgress } from './run-
 // ──────────────────────────────────────────────
 // Repository Factory
 // ──────────────────────────────────────────────
+// Local imports needed — re-exports above don't create
+// in-scope bindings for use within this file.
 
 import type { DbClient } from './base';
+import { AdminUserRepository } from './admin-user.repository';
+import { DesignRepository } from './design.repository';
+import { PlatformListingRepository } from './platform-listing.repository';
+import { DesignExportRepository } from './design-export.repository';
+import { RunRepository } from './run.repository';
+import { RunDesignRepository } from './run-design.repository';
 
 export function createRepositories(db: DbClient) {
   return {
